@@ -20,6 +20,7 @@ import Foundation
     let timezone, id: Int?
     let name: String?
     let cod: Int?
+   
 }
 
 
@@ -57,7 +58,10 @@ struct Sys: Codable {
 // MARK: - Weather
 struct Weather: Codable {
     let id: Int?
-    let main, description, icon: String?
+    let main: String?
+    let description: String?
+    let icon: String?
+    
 }
 
 // MARK: - Wind
