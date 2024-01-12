@@ -26,6 +26,12 @@ struct ContentView: View {
                            .frame(width: 80, height: 80)
                            .padding(.bottom, 10)
                    }
+                
+                if let description = weatherData?.weather?.first?.description {
+                        Text(description)
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundStyle(.white)
+                    }
                
                 if let weatherData = weatherData {
                     
@@ -58,11 +64,11 @@ struct ContentView: View {
 //                    
 //                Spacer()
                 
-                                                Button {
-                                                    isNight.toggle()
-                                                } label: {
-                                                    WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
-                                                }
+//                                                Button {
+//                                                    isNight.toggle()
+//                                                } label: {
+//                                                    WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
+//                                                }
                                 
                                                 Spacer()
             }
