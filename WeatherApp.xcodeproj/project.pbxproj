@@ -15,6 +15,7 @@
 		4D652D272B4861FD00970169 /* WeatherButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D652D262B4861FD00970169 /* WeatherButton.swift */; };
 		4D652D292B4C3A0800970169 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D652D282B4C3A0800970169 /* API.swift */; };
 		4D652D2B2B4D7F9400970169 /* WeatherStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D652D2A2B4D7F9400970169 /* WeatherStructure.swift */; };
+		4DE6C2602B51675000804B85 /* DailyForecastStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE6C25F2B51675000804B85 /* DailyForecastStructure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		4D652D262B4861FD00970169 /* WeatherButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherButton.swift; sourceTree = "<group>"; };
 		4D652D282B4C3A0800970169 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		4D652D2A2B4D7F9400970169 /* WeatherStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStructure.swift; sourceTree = "<group>"; };
+		4DE6C25F2B51675000804B85 /* DailyForecastStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastStructure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				4D652D282B4C3A0800970169 /* API.swift */,
 				4D652D2A2B4D7F9400970169 /* WeatherStructure.swift */,
 				4D4C13012B4EA3E20053989E /* WeatherIcon.swift */,
+				4DE6C25F2B51675000804B85 /* DailyForecastStructure.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D2D711E2B46F2DA004F1EBD /* ContentView.swift in Sources */,
+				4DE6C2602B51675000804B85 /* DailyForecastStructure.swift in Sources */,
 				4D4C13022B4EA3E20053989E /* WeatherIcon.swift in Sources */,
 				4D2D711C2B46F2DA004F1EBD /* WeatherAppApp.swift in Sources */,
 				4D652D292B4C3A0800970169 /* API.swift in Sources */,

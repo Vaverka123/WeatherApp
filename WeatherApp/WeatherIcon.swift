@@ -8,6 +8,7 @@
 import Foundation
 
 enum WeatherIconMapping {
+    
     static func sfSymbolForOpenWeatherMapIcon(icon: String) -> String {
        
         switch icon {
