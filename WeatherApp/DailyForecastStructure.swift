@@ -1,9 +1,7 @@
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
 //
-//  DailyForecastStructure.swift
-//  WeatherApp
-//
-//  Created by Vera Maslava on 12.01.24.
-//
+//   let dailyForecastStructure = try? JSONDecoder().decode(DailyForecastStructure.self, from: jsonData)
 
 import Foundation
 
@@ -37,13 +35,16 @@ enum DailyForecastAPI {
         let weather: [Weather]?
         let clouds: Clouds?
         let wind: Wind?
-        let visibility, pop: Int?
+        let visibility: Int?
+        let pop: Double?
         let sys: Sys?
         let dtTxt: String?
+        let snow: Snow?
         
         enum CodingKeys: String, CodingKey {
             case dt, main, weather, clouds, wind, visibility, pop, sys
             case dtTxt = "dt_txt"
+            case snow
         }
     }
     
@@ -71,6 +72,15 @@ enum DailyForecastAPI {
         }
     }
     
+    // MARK: - Snow
+    struct Snow: Codable {
+        let the3H: Double?
+        
+        enum CodingKeys: String, CodingKey {
+            case the3H = "3h"
+        }
+    }
+    
     // MARK: - Sys
     struct Sys: Codable {
         let pod: Pod?
@@ -85,21 +95,28 @@ enum DailyForecastAPI {
     struct Weather: Codable {
         let id: Int?
         let main: MainEnum?
-        let description: Description?
+        let description: String?
         let icon: String?
     }
     
-    enum Description: String, Codable {
-        case brokenClouds = "broken clouds"
-        case clearSky = "clear sky"
-        case fewClouds = "few clouds"
-        case overcastClouds = "overcast clouds"
-        case scatteredClouds = "scattered clouds"
-    }
-    
+//    enum Description: String, Codable {
+//        case brokenClouds = "broken clouds"
+//        case clearSky = "clear sky"
+//        case fewClouds = "few clouds"
+//        case lightSnow = "light snow"
+//        case overcastClouds = "overcast clouds"
+//        case scatteredClouds = "scattered clouds"
+//        case showerRain = "shower rain"
+//        case rain = "rain"
+//        case snow = "snow"
+//        case mist = "mist"
+//        case thunderstorm =  "thunderstorm"
+//    }
+//    
     enum MainEnum: String, Codable {
         case clear = "Clear"
         case clouds = "Clouds"
+        case snow = "Snow"
     }
     
     // MARK: - Wind

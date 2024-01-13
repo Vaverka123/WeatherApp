@@ -37,7 +37,7 @@ final class APIManager {
             } else if let data = data {
                 do {
                     let dailyForecastStructure = try JSONDecoder().decode(DailyForecastAPI.DailyForecastStructure.self, from: data)
-                   
+                  
                     let next24HoursData = dailyForecastStructure.list?.filter { forecast in
                      
                         return forecast.dt ?? 0 > Int(Date().timeIntervalSince1970) && forecast.dt ?? 0 < Int(Date().timeIntervalSince1970) + 24 * 3600
@@ -54,8 +54,11 @@ final class APIManager {
                 }
             }
         }
+        
+        sessionForecast.resume()
     }
 
+    
     func loadDailyForecast(completion: @escaping (Result<DailyForecastAPI.DailyForecastStructure, Error>) -> Void) {
         guard let urlForecast = URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&appid=aadf014bb0e02cab417fb007f23b93d4") else { return }
         

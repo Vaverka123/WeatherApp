@@ -42,17 +42,16 @@ struct ContentView: View {
                                      Text(description)
                                          .font(.system(size: 20, weight: .medium))
                                          .foregroundStyle(.white)
-                                 }
+                                 } 
 
-                
                 if let hourlyForecastData = dailyForecastData {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(hourlyForecastData.list ?? [], id: \.dt) { forecast in
-                                if let time = extractTime(from: forecast.dtTxt ?? "") {
-                                    HourlyForecastView(time: time,
-                                                       icon: forecast.weather?.first?.icon ?? "",
-                                                       temperature: Int(forecast.main?.temp ?? 0))
+                              if let time = extractTime(from: forecast.dtTxt ?? "") {
+                                HourlyForecastView(time: time,
+                                                   icon: forecast.weather?.first?.icon ?? "",
+                                                   temperature: Int(forecast.main?.temp ?? 0))
                                     .padding()
                                 }
                             }
@@ -123,6 +122,7 @@ func fetchHourlyForecast() {
                 }
             case .failure(let error):
                 print("Error fetching hourly forecast: \(error)")
+                
             }
         }
     }
@@ -180,7 +180,7 @@ struct MainTempView: View {
 
 struct HourlyForecastView: View {
      
-    var time: String
+    var time = "dt_txt"
     var icon: String
     var temperature: Int
     
