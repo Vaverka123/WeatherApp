@@ -14,76 +14,75 @@ struct ContentView: View {
     @State private var dailyForecastData: DailyForecastAPI.DailyForecastStructure?
     @State private var weatherIconURL: URL?
     
+
     var body: some View {
         ZStack {
            BackgroundView(isNight: isNight)
             VStack {
                 CityTextView(cityName: "London")
                 
-                if let weatherData = weatherData, let icon = weatherData.weather?.first?.icon {
-                       Image(systemName: WeatherIconMapping.sfSymbolForOpenWeatherMapIcon(icon: icon))
-                           .symbolRenderingMode(.multicolor)
-                           .resizable()
-                           .aspectRatio(contentMode: .fit)
-                           .frame(width: 80, height: 80)
-                           .padding(.bottom, 10)
-                   }
-               
-                if let weatherData = weatherData {
-                    
-                    MainTempView(temperature: Int(weatherData.main?.temp ?? 0))
-                        } else {
-                    Text("Loading...")
-                        .font(.system(size: 20, weight: .medium, design: .default))
+                if let weatherData = weatherData, let icon = weatherData.weather?.first?.icon, let description = weatherData.weather?.first?.description {
+                    Image(systemName: WeatherIconMapping.sfSymbolForOpenWeatherMapIcon(icon: icon))
+                        .symbolRenderingMode(.multicolor)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 80, height: 80)
+                        .padding(.bottom, 10)
+                    Text(description)
+                        .font(.system(size: 20, weight: .medium))
                         .foregroundStyle(.white)
+                    MainTempView(temperature: Int(weatherData.main?.temp ?? 0))
+                } else {
+                    LoadingView()
                 }
                 
-                if let description = weatherData?.weather?.first?.description {
-                                     Text(description)
-                                         .font(.system(size: 20, weight: .medium))
-                                         .foregroundStyle(.white)
-                                 } 
-
                 if let hourlyForecastData = dailyForecastData {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(hourlyForecastData.list ?? [], id: \.dt) { forecast in
-                              if let time = extractTime(from: forecast.dtTxt ?? "") {
-                                HourlyForecastView(time: time,
-                                                   icon: forecast.weather?.first?.icon ?? "",
-                                                   temperature: Int(forecast.main?.temp ?? 0))
+                                if let time = extractTime(from: forecast.dtTxt ?? "") {
+                                    HourlyForecastView(time: time,
+                                                       icon: forecast.weather?.first?.icon ?? "",
+                                                       temperature: Int(forecast.main?.temp ?? 0))
                                     .padding()
                                 }
                             }
                         }
                     }
                 } else {
-                                   Text("Loading...")
-                                       .font(.system(size: 20, weight: .medium, design: .default))
-                                       .foregroundStyle(.white)
-                               }
+                    LoadingView()
+                }
+                
+                if let dailyForecastData = dailyForecastData {
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(dailyForecastData.list ?? [], id: \.dt) { forecast in
+                                // if let date = extractDate(from: forecast.dtTxt ?? "") {
                                 
+                                DailyForecastView(date: forecast.dtTxt ?? "",
+                                                  icon: forecast.weather?.first?.icon ?? "",
+                                                  description: forecast.weather?.first?.description ?? "",
+                                                  temperature: Int(forecast.main?.tempMax ?? 0))
+                                //    }
+                            }
+                        }
+                    }
+                }
+                        else {
+                            LoadingView()
+                }
+                
+                
+
+                
+                
+                
 //                                                Button {
 //                                                    isNight.toggle()
 //                                                } label: {
 //                                                    WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
 //                                                }
-//                HStack {
-//                        if let dailyForecastData = dailyForecastData {
-//                 
-//                        ForEach(dailyForecastData.list ?? [], id: \.dt) { forecast in
-//                            DailyForecastView(date: forecast.dtTxt ?? "",
-//                                              icon: forecast.weather?.first?.icon ?? "",
-//                                              temperature: Int(forecast.main?.temp ?? 0))
-//                            .padding(.top, 20)
-//                        }
-//                    }  else {
-//                        Text("Loading...")
-//                            .font(.system(size: 20, weight: .medium, design: .default))
-//                            .foregroundStyle(.white)
-//                    }
-//                }
-
+                
             }
         }
         .onAppear {
@@ -126,22 +125,23 @@ func fetchHourlyForecast() {
             }
         }
     }
-
+    
 func fetchDailyForecast() {
     let apiManager = APIManager()
         apiManager.loadDailyForecast { result in
-        switch result {
+            switch result {
             case .success(let dailyForecastStructure):
                 DispatchQueue.main.async {
                     self.dailyForecastData = dailyForecastStructure
                 }
             case .failure(let error):
-                print("Error fetching daily forecast: \(error)")
+                print("Error fetching hourly forecast: \(error)")
+                
             }
         }
     }
-    
 }
+    
 
 struct BackgroundView: View {
 
@@ -219,7 +219,10 @@ struct DailyForecastView: View {
     @State private var dailyForecastData: DailyForecastAPI.DailyForecastStructure?
     var date: String
     var icon: String
+    var description: String
     var temperature: Int
+//    var tempMin: Int
+//    var tempMax: Int
 
     var body: some View {
         VStack {
@@ -231,9 +234,37 @@ struct DailyForecastView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)
+            Text(description)
+                 .font(.system(size: 12, weight: .medium))
+                 .foregroundStyle(.white)
             Text("\(temperature)°C")
-                .font(.system(size: 28, weight: .medium))
+                .font(.system(size: 16, weight: .medium))
                 .foregroundStyle(.white)
+         
         }
+    }
+}
+
+func extractDate(from dateString: String) -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    if let date = dateFormatter.date(from: dateString) {
+        dateFormatter.dateFormat = "dd.MM"
+        return dateFormatter.string(from: date)
+       
+    } else {
+        return nil
+    }
+    
+
+
+}
+
+struct LoadingView: View {
+    var body: some View {
+        Text("Loading...")
+            .font(.system(size: 20, weight: .medium, design: .default))
+            .foregroundStyle(.white)
     }
 }

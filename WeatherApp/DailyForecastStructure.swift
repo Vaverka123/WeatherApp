@@ -98,21 +98,7 @@ enum DailyForecastAPI {
         let description: String?
         let icon: String?
     }
-    
-//    enum Description: String, Codable {
-//        case brokenClouds = "broken clouds"
-//        case clearSky = "clear sky"
-//        case fewClouds = "few clouds"
-//        case lightSnow = "light snow"
-//        case overcastClouds = "overcast clouds"
-//        case scatteredClouds = "scattered clouds"
-//        case showerRain = "shower rain"
-//        case rain = "rain"
-//        case snow = "snow"
-//        case mist = "mist"
-//        case thunderstorm =  "thunderstorm"
-//    }
-//    
+      
     enum MainEnum: String, Codable {
         case clear = "Clear"
         case clouds = "Clouds"
@@ -126,3 +112,5 @@ enum DailyForecastAPI {
         let gust: Double?
     }
 }
+
+
