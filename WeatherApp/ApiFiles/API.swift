@@ -7,10 +7,13 @@
 
 import Foundation
 
+
 final class APIManager {
    
-    func loadWeather(completion: @escaping (Result <WeatherAPI.WeatherStructure, Error>) -> Void) {
-        guard let urlWeather = URL(string:  "https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=aadf014bb0e02cab417fb007f23b93d4") else { return }
+    let apiKey = "aadf014bb0e02cab417fb007f23b93d4"
+    
+    func loadWeather(city: String, completion: @escaping (Result <WeatherAPI.WeatherStructure, Error>) -> Void) {
+        guard let urlWeather = URL(string:  "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=\(apiKey)") else { return }
         
         let sessionWeather = URLSession.shared.dataTask(with: URLRequest(url: urlWeather)) { data, response, error in
             if let error {
@@ -28,8 +31,8 @@ final class APIManager {
         sessionWeather.resume()
     }
     
-    func loadHourlyForecast(completion: @escaping (Result<DailyForecastAPI.DailyForecastStructure, Error>) -> Void) {
-        guard let urlForecast = URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&appid=aadf014bb0e02cab417fb007f23b93d4") else { return }
+    func loadHourlyForecast(city: String, completion: @escaping (Result<DailyForecastAPI.DailyForecastStructure, Error>) -> Void) {
+        guard let urlForecast = URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&units=metric&appid=\(apiKey)") else { return }
         
         let sessionForecast = URLSession.shared.dataTask(with: URLRequest(url: urlForecast)) { data, response, error in
             if let error = error {
@@ -47,8 +50,8 @@ final class APIManager {
         sessionForecast.resume()
     }
 
-    func loadDailyForecast(completion: @escaping (Result<DailyForecastAPI.DailyForecastStructure, Error>) -> Void) {
-        guard let urlForecast = URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&appid=aadf014bb0e02cab417fb007f23b93d4") else { return }
+    func loadDailyForecast(city: String, completion: @escaping (Result<DailyForecastAPI.DailyForecastStructure, Error>) -> Void) {
+        guard let urlForecast = URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&units=metric&appid=\(apiKey)") else { return }
         
         let sessionForecast = URLSession.shared.dataTask(with: URLRequest(url: urlForecast)) { data, response, error in
             if let error = error {
@@ -65,5 +68,6 @@ final class APIManager {
         
         sessionForecast.resume()
     }
+    
 }
 
