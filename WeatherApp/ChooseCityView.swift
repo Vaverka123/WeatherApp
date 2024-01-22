@@ -9,71 +9,48 @@ import SwiftUI
 
 struct ChooseCityView: View {
     
-        let europeanCapitals = ["Paris", "Berlin", "Madrid", "Rome", "London", "Amsterdam", "Lisbon"]
+        @EnvironmentObject var cityManager: CityManager
+    
+        let capitals = ["Paris", "Berlin", "Madrid", "Rome", "London", "Amsterdam", "Lisbon"]
 
         var body: some View {
+            
             NavigationView {
-                ScrollView {
-                    ForEach(europeanCapitals, id: \.self) { capital in
-                        NavigationLink(destination: SingleCityView(cityName: capital)) {
-                            Text(capital)
-                                .padding()
-                                .background(Color.blue)
+                VStack {
+                    NavigationLink(destination: FavoriteCityView()) {
+                        HStack {
+                            Image(systemName: "star.fill")
+                                .foregroundStyle(.white)
+                            Text("View Favorite Cities")
                                 .foregroundColor(.white)
-                                .cornerRadius(10)
-                                .padding(.horizontal)
-                                .padding(.vertical, 5)
+                                .fontWeight(.bold)
+                        }
+                        .padding()
+                        .background(Color.pink)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                    }
+                   
+  
+                    ScrollView {
+                        ForEach(capitals, id: \.self) { capital in
+                            NavigationLink(destination: SingleCityView(cityName: capital)) {
+                                Text(capital)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal)
+                                    .padding(.vertical, 5)
+                            }
                         }
                     }
                 }
-                .navigationTitle("European Capitals")
+                .navigationTitle("Available cities")
+                
             }
         }
     }
 
-   
-//    let capitals = ["Warsaw", "London", "Lisbon", "Paris", "Berlin"]
-// 
-//    
-//    var body: some View {
-//        
-//                ZStack {
-//                    ContainerRelativeShape()
-//                        .fill(Color.cyan.gradient)
-//                        .ignoresSafeArea()
-//        
-//                    VStack(alignment: .leading) {
-//                        
-//                        HStack {
-//                            Button(action: {}) {
-//                                Image(systemName: "arrow.left" )
-//                                    .padding(.leading)
-//                            }
-//                            .accessibilityLabel("back")
-//                            .foregroundStyle(.white)
-//                            .padding()
-//                            
-//                            Text("Add new city")
-//                                .foregroundStyle(.white)
-//                        }
-//                        
-//                        HStack {
-//                            
-//                            
-//                            
-//                            
-//                        }
-//                        .padding(8)
-//                        .background(Color(white: 0.9))
-//                        .cornerRadius(8)
-//                        .padding()
-//                        
-//                    }
-//                     
-//                    }
-//    }
-//}
-                                      
-#Preview {
-    ChooseCityView()
-}
+
