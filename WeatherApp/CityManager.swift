@@ -9,4 +9,5 @@ import Combine
 
 class CityManager: ObservableObject {
     @Published var favoriteCities: [String] = []
+    @Published var selectedCity: String?
 }

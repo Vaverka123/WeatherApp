@@ -9,10 +9,30 @@ import Foundation
 
 
 final class APIManager {
+    
+    var apiKey: String?
+    
+    init() {
+        loadConfiguration()
+    }
    
-    let apiKey = "aadf014bb0e02cab417fb007f23b93d4"
+    func loadConfiguration() {
+        if let path = Bundle.main.path(forResource: "Configuration", ofType: "plist"),
+           let configDict = NSDictionary(contentsOfFile: path) as? [String: Any],
+           let apiKey = configDict["apiKey"] as? String {
+            self.apiKey = apiKey
+        } else {
+            print("Error: Unable to read API Key from configuration file")
+        }
+    }
     
     func loadWeather(city: String, completion: @escaping (Result <WeatherAPI.WeatherStructure, Error>) -> Void) {
+
+        guard let apiKey = apiKey else {
+            completion(.failure(APIError.apiKeyNotLoaded))
+            return
+        }
+                
         guard let urlWeather = URL(string:  "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=\(apiKey)") else { return }
         
         let sessionWeather = URLSession.shared.dataTask(with: URLRequest(url: urlWeather)) { data, response, error in
@@ -32,6 +52,12 @@ final class APIManager {
     }
     
     func loadHourlyForecast(city: String, completion: @escaping (Result<DailyForecastAPI.DailyForecastStructure, Error>) -> Void) {
+        
+        guard let apiKey = apiKey else {
+            completion(.failure(APIError.apiKeyNotLoaded))
+            return
+        }
+        
         guard let urlForecast = URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&units=metric&appid=\(apiKey)") else { return }
         
         let sessionForecast = URLSession.shared.dataTask(with: URLRequest(url: urlForecast)) { data, response, error in
@@ -51,6 +77,12 @@ final class APIManager {
     }
 
     func loadDailyForecast(city: String, completion: @escaping (Result<DailyForecastAPI.DailyForecastStructure, Error>) -> Void) {
+        
+        guard let apiKey = apiKey else {
+            completion(.failure(APIError.apiKeyNotLoaded))
+            return
+        }
+        
         guard let urlForecast = URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&units=metric&appid=\(apiKey)") else { return }
         
         let sessionForecast = URLSession.shared.dataTask(with: URLRequest(url: urlForecast)) { data, response, error in
@@ -69,5 +101,9 @@ final class APIManager {
         sessionForecast.resume()
     }
     
+}
+
+enum APIError: Error {
+    case apiKeyNotLoaded
 }
 
