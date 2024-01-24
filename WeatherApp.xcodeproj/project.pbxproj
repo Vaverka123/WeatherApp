@@ -23,6 +23,8 @@
 		4D65CEAC2B5AF42300A694C0 /* FavoriteCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D65CEAB2B5AF42300A694C0 /* FavoriteCityView.swift */; };
 		4D65CEAE2B5AF52200A694C0 /* ForecastModelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D65CEAD2B5AF52200A694C0 /* ForecastModelsView.swift */; };
 		4D65CEB02B5E75F500A694C0 /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D65CEAF2B5E75F500A694C0 /* CityManager.swift */; };
+		4D65CEB22B60253E00A694C0 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D65CEB12B60253E00A694C0 /* Configuration.plist */; };
+		4D65CEB42B60299E00A694C0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4D65CEB32B60299E00A694C0 /* .gitignore */; };
 		4DE6C2602B51675000804B85 /* DailyForecastStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE6C25F2B51675000804B85 /* DailyForecastStructure.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		4D65CEAB2B5AF42300A694C0 /* FavoriteCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCityView.swift; sourceTree = "<group>"; };
 		4D65CEAD2B5AF52200A694C0 /* ForecastModelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModelsView.swift; sourceTree = "<group>"; };
 		4D65CEAF2B5E75F500A694C0 /* CityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityManager.swift; sourceTree = "<group>"; };
+		4D65CEB12B60253E00A694C0 /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
+		4D65CEB32B60299E00A694C0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4DE6C25F2B51675000804B85 /* DailyForecastStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastStructure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +65,7 @@
 		4D2D710F2B46F2D9004F1EBD = {
 			isa = PBXGroup;
 			children = (
+				4D65CEB32B60299E00A694C0 /* .gitignore */,
 				4D2D711A2B46F2DA004F1EBD /* WeatherApp */,
 				4D2D71192B46F2DA004F1EBD /* Products */,
 			);
@@ -82,11 +87,11 @@
 				4D2D71212B46F2DB004F1EBD /* Preview Content */,
 				4D65CE982B592ED000A694C0 /* Brainstorm */,
 				4D65CE932B581F7B00A694C0 /* ApiFiles */,
-				4D65CE942B58248C00A694C0 /* SingleCityView.swift */,
 				4D65CEA92B5AB2D000A694C0 /* ChooseCityView.swift */,
+				4D65CEAF2B5E75F500A694C0 /* CityManager.swift */,
 				4D65CEAB2B5AF42300A694C0 /* FavoriteCityView.swift */,
 				4D65CEAD2B5AF52200A694C0 /* ForecastModelsView.swift */,
-				4D65CEAF2B5E75F500A694C0 /* CityManager.swift */,
+				4D65CE942B58248C00A694C0 /* SingleCityView.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				4D652D282B4C3A0800970169 /* API.swift */,
+				4D65CEB12B60253E00A694C0 /* Configuration.plist */,
 				4DE6C25F2B51675000804B85 /* DailyForecastStructure.swift */,
 				4D4C13012B4EA3E20053989E /* WeatherIcon.swift */,
 				4D652D2A2B4D7F9400970169 /* WeatherStructure.swift */,
@@ -184,6 +190,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D65CEB42B60299E00A694C0 /* .gitignore in Resources */,
+				4D65CEB22B60253E00A694C0 /* Configuration.plist in Resources */,
 				4D2D71232B46F2DB004F1EBD /* Preview Assets.xcassets in Resources */,
 				4D2D71202B46F2DB004F1EBD /* Assets.xcassets in Resources */,
 			);

@@ -10,11 +10,12 @@ import SwiftUI
 @main
 struct WeatherAppApp: App {
     
-    @StateObject private var cityManager = CityManager()
+   @StateObject private var cityManager = CityManager()
     
     var body: some Scene {
         WindowGroup {
-            ChooseCityView().environmentObject(cityManager)
+            ChooseCityView()
+                .environmentObject(cityManager)
         }
     }
 }

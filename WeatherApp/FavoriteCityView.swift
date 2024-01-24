@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct FavoriteCityView: View {
-    
-    @EnvironmentObject var cityManager: CityManager
 
+    @EnvironmentObject var cityManager: CityManager
+    
     var body: some View {
-            
+
         TabView {
             ForEach(cityManager.favoriteCities, id: \.self) { cityName in
                 SingleCityView(cityName: cityName)

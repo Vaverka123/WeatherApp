@@ -12,6 +12,7 @@ struct SingleCityView: View {
     let cityName: String
     @EnvironmentObject var cityManager: CityManager
 
+    @State private var showToggleFavoriteButton = false
     @State private var weatherData: WeatherAPI.WeatherStructure?
     @State private var dailyForecastData: DailyForecastAPI.DailyForecastStructure?
     
@@ -23,20 +24,21 @@ struct SingleCityView: View {
             BackgroundView()
             VStack {
                 
-                Button(action: { toggleFavorite() }) {
-                               
-                    HStack {
-                        Image(systemName: isFavorite ? "star.fill" : "star")
-                        Text(isFavorite ? "Remove from favorites" : "Add to favorites")
+                if showToggleFavoriteButton {
+                    Button(action: { toggleFavorite() }) {
+                        
+                        HStack {
+                            Image(systemName: isFavorite ? "star.fill" : "star")
+                            Text(isFavorite ? "Remove from favorites" : "Add to favorites")
+                        }
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
                     }
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
                 }
-                
                     CityTextView(cityName: cityName)
                        
                     if let weatherData = weatherData, let icon = weatherData.weather?.first?.icon, let description = weatherData.weather?.first?.description {
@@ -86,6 +88,7 @@ struct SingleCityView: View {
                     .padding(.bottom, 40)
                 }
                 .onAppear {
+                    showToggleFavoriteButton = true
                     fetchWeather(for: cityName)
                     fetchHourlyForecast(for: cityName)
                     fetchDailyForecast(for: cityName)
@@ -99,6 +102,7 @@ struct SingleCityView: View {
         } else {
             cityManager.favoriteCities.append(cityName)
             }
+        
         }
     
             
@@ -147,9 +151,3 @@ struct SingleCityView: View {
             }
         }
             
-
-
-
-//#Preview {
-//    SingleCityView(cityName:  )
-//}
