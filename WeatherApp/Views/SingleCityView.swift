@@ -16,7 +16,7 @@ struct SingleCityView: View {
     @State private var weatherData: WeatherAPI.WeatherStructure?
     @State private var dailyForecastData: DailyForecastAPI.DailyForecastStructure?
     
-    private var isFavorite: Bool { cityManager.favoriteCities.contains(cityName) }
+   private var isFavorite: Bool { cityManager.favoriteCities.contains(cityName) }
     
     
     var body: some View {
@@ -52,7 +52,7 @@ struct SingleCityView: View {
                             ScrollView(.horizontal) {
                                 HStack {
                                     ForEach(hourlyForecastData.list ?? [], id: \.dt) { forecast in
-                                        if let time = extractTime(from: forecast.dtTxt ?? "") {
+                                        if let time = formatDate(from: forecast.dtTxt ?? "", format: "HH:mm") {
                                             HourlyForecastView(time: time,
                                                                icon: forecast.weather?.first?.icon ?? "",
                                                                temperature: Int(forecast.main?.temp ?? 0))
@@ -68,7 +68,8 @@ struct SingleCityView: View {
                         ScrollView(.horizontal) {
                             HStack {
                                 ForEach(dailyForecastData.list ?? [], id: \.dt) { forecast in
-                                    if let date = extractDate(from: forecast.dtTxt ?? ""), let time = extractTime(from: forecast.dtTxt ?? "") {
+                                    if let date = formatDate(from: forecast.dtTxt ?? "", format: "dd.MM"),
+                                        let time = formatDate(from: forecast.dtTxt ?? "", format: "HH:mm") {
                                     
                                     DailyForecastView(date: date,
                                                         time: time,

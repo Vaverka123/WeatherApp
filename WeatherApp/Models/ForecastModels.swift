@@ -76,18 +76,6 @@ struct HourlyForecastView: View {
             }
         }
 
-func extractTime(from dateString: String) -> String? {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            
-            if let date = dateFormatter.date(from: dateString) {
-                dateFormatter.dateFormat = "HH:mm"
-                return dateFormatter.string(from: date)
-            } else {
-                return nil
-            }
-        }
-
 struct DailyForecastView: View {
             
     @State private var dailyForecastData: DailyForecastAPI.DailyForecastStructure?
@@ -123,19 +111,6 @@ struct DailyForecastView: View {
             }
         }
 
-func extractDate(from dateString: String) -> String? {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            
-            if let date = dateFormatter.date(from: dateString) {
-                dateFormatter.dateFormat = "dd.MM"
-                return dateFormatter.string(from: date)
-               
-            } else {
-                return nil
-            }
-        }
-
 struct LoadingView: View {
             var body: some View {
                 Text("Loading...")
@@ -144,3 +119,39 @@ struct LoadingView: View {
             }
         }
 
+//func extractDate(from dateString: String) -> String? {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            
+//            if let date = dateFormatter.date(from: dateString) {
+//                dateFormatter.dateFormat = "dd.MM"
+//                return dateFormatter.string(from: date)
+//               
+//            } else {
+//                return nil
+//            }
+//        }
+//
+//func extractTime(from dateString: String) -> String? {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            
+//            if let date = dateFormatter.date(from: dateString) {
+//                dateFormatter.dateFormat = "HH:mm"
+//                return dateFormatter.string(from: date)
+//            } else {
+//                return nil
+//            }
+//        }
+
+func formatDate(from dateString: String, format: String) -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    if let date = dateFormatter.date(from: dateString) {
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: date)
+    } else {
+        return nil
+    }
+}

@@ -39,7 +39,7 @@ struct List: Codable {
 
     enum CodingKeys: String, CodingKey {
         case dt, main, weather, clouds, wind, visibility, pop, sys
-        case dtTxt = "dt_txt"
+        case dtTxt = "dtTxt"
         case snow, rain
     }
 }
